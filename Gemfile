@@ -72,3 +72,5 @@ gem 'view_component', '~> 3.14'
 
 gem 'rubocop', '~> 1.66'
 gem 'rubocop-rails', '~> 2.26'
+
+gem 'pry', '~> 0.14.2'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_21_202534) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_21_214250) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,8 +37,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_21_202534) do
     t.string "classification", default: "fun"
     t.date "date", null: false
     t.string "name"
-    t.string "city", null: false
-    t.string "venue", null: false
+    t.string "city"
+    t.string "venue"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city"], name: "index_concerts_on_city"

@@ -1,3 +1,6 @@
 class Artist < ApplicationRecord
-  validates :name, presence: true
+  has_many :artist_concerts, autosave: true, dependent: :destroy
+  has_many :concerts, through: :artist_concerts, inverse_of: :artists
+
+  validates :name, presence: true, uniqueness: true
 end
