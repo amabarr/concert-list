@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_21_214250) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_21_222903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_21_214250) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["genres"], name: "index_artists_on_genres"
-    t.index ["name"], name: "index_artists_on_name"
+    t.index ["name"], name: "unique_index_artists_on_name", unique: true
   end
 
   create_table "concerts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_21_214250) do
     t.datetime "updated_at", null: false
     t.index ["city"], name: "index_concerts_on_city"
     t.index ["classification"], name: "index_concerts_on_classification"
-    t.index ["date"], name: "index_concerts_on_date"
+    t.index ["date"], name: "unique_index_concerts_on_date", unique: true
   end
 
 end
