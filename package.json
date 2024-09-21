@@ -2,10 +2,13 @@
   "name": "app",
   "private": true,
   "devDependencies": {
+    "chokidar": "^4.0.0",
     "esbuild": "^0.23.1"
   },
   "scripts": {
-    "build": "esbuild app/javascript/components/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"
+    "ts-check": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput",
+    "build": "esbuild app/javascript/components/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "start": "yarn build --watch --servedir=app/assets/builds"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
