@@ -4,10 +4,10 @@ class CreateConcerts < ActiveRecord::Migration[7.1]
   def change
     create_table :concerts do |t|
       t.string :classification, default: 'fun'
-      t.date :date
-      t.string :name
-      t.string :city
-      t.string :venue
+      t.date :date, null: false
+      t.string :name, null: true
+      t.string :city, null: false
+      t.string :venue, null: false
 
       t.timestamps
     end
