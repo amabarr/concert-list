@@ -4,13 +4,24 @@ module Api
       before_action :set_concert, only: %i[show destroy]
 
       def index
-        concerts = Concert.all.includes(:artists)
+        @params = params.permit(:classification, :limit, :page).to_h
+        @concerts = Concert.all.includes(:artists)
+        # filter
+        @concerts = Concert.by_classification(@filters[:classification]) if @params[:classification].present?
 
-        concerts_with_artists = concerts.map do |concert|
+        # paginate
+        page = @params[:page].to_i || 1
+        per_page = @params[:limit].to_i || 25
+        offset = (page - 1) * per_page
+
+        total_pages = @concerts.count.fdiv(per_page).ceil
+        @concerts = @concerts.limit(per_page).offset(offset)
+       
+        concerts_with_artists = @concerts.map do |concert|
           render_json(concert:)
         end
 
-        render json: concerts_with_artists
+        render json: {body: {concerts: concerts_with_artists, pagination_metadata: {page:, per_page:, page_total: total_pages}}}
       end
 
       def count
