@@ -9,7 +9,7 @@ module Api
         concerts_with_artists = concerts.map do |concert|
           render_json(concert:)
         end
-    
+
         render json: concerts_with_artists
       end
 

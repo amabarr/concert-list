@@ -3,4 +3,8 @@ class Artist < ApplicationRecord
   has_many :concerts, through: :artist_concerts, inverse_of: :artists
 
   validates :name, presence: true, uniqueness: true
+
+  def times_seen
+    concerts.count
+  end
 end
