@@ -68,3 +68,10 @@
  .card-metadata {
   margin: .75rem
  }
+
+ .artists-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+ }

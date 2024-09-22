@@ -7,9 +7,6 @@ interface ArtistCardProps {
 }
 
 export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
-
-  
-
   return (
     <div className="card">
       <h5 className="card-title">
@@ -17,9 +14,10 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
       </h5>
       <div className='cardBody'>
         <div className="card-text">
-          <div>
+          {artist?.genres.length > 0 ? <div>
             Genres: {artist.genres.join(", ")}
-          </div>
+          </div> : null}
+          {artist?.concert_count ? <div>Times seen: {artist.concert_count}</div> : null}
         </div>
       </div>
     </div>

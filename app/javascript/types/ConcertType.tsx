@@ -12,5 +12,5 @@ export type ArtistType = {
   id: string,
   name: string,
   genres: string[]
-  concertCount?: number
+  concert_count?: number
 }
