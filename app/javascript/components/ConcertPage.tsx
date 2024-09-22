@@ -42,9 +42,9 @@ export const ConcertPage = () => {
   const date = new Date(concert.date).toDateString()
 
   return (
-    <div className="container-fluid concert-page">
+    <div className="container-fluid page">
       <Header pageName={artists} />
-      <div className="container-fluid concert-container">
+      <div className="container-fluid single-container">
 
         <div className="concert-metadata">
           <div className="concert-date">
@@ -63,8 +63,6 @@ export const ConcertPage = () => {
           </div>
         </div>
       </div>
-
-
     </div>
   )
 }

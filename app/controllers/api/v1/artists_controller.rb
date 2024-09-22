@@ -1,7 +1,7 @@
 module Api
   module V1
     class ArtistsController < ApplicationController
-      before_action :artist, only: %i[show concerts_for_artist]
+      before_action :artist, only: %i[show]
 
       def index
         artists = Artist.all.map { |a| render_json(artist: a) }
@@ -11,10 +11,6 @@ module Api
 
       def show
         render json: @artist
-      end
-
-      def concerts_for_artist
-        render json: @artist.concerts
       end
 
       private

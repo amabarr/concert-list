@@ -22,11 +22,13 @@ export const ConcertCard: React.FC<ConcertCardProps> = ({ concert }) => {
         </h5>
       <div className='cardBody'>
         <div className="card-text">
-          <div>
+          <div className="card-metadata">
             {date}
           </div>
+          <div className="card-metadata">
           {artistNames}
-          <div>
+          </div>
+          <div className="card-metadata"> 
             {concert.venue}
           </div>
         </div>

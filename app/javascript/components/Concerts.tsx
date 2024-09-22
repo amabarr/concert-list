@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react"
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { ConcertType } from '../types/ConcertType'
-import {ConcertCard} from './ConcertCard'
-import {Header} from './Header'
-import {LoadingSpinner} from './LoadingSpinner'
+import { ConcertCard } from './ConcertCard'
+import { Header } from './Header'
+import { LoadingSpinner } from './LoadingSpinner'
 
 const CONCERTS_API_URL = "/api/v1/concerts/index";
 
 export const Concerts: React.FC = () => {
 
   const navigate = useNavigate()
-  const [concerts, setConcerts] =  useState<ConcertType[]>([])
+  const [concerts, setConcerts] = useState<ConcertType[]>([])
 
   useEffect(() => {
     fetch(CONCERTS_API_URL)
@@ -22,15 +22,16 @@ export const Concerts: React.FC = () => {
       })
       .then((res) => {
         console.log(res.body)
-        setConcerts(res)})
-       .catch(() => navigate("/"));
+        setConcerts(res)
+      })
+      .catch(() => navigate("/"));
   }, []);
 
 
   return <div className={"container-fluid"}>
     <Header pageName="concerts" />
-<div className="concerts-container">
-{concerts.length ? concerts.map((concert) => <ConcertCard concert={concert}  key={concert.id} />) : <LoadingSpinner /> }
-</div>
+    <div className="concerts-container">
+      {concerts.length ? concerts.map((concert) => <ConcertCard concert={concert} key={concert.id} />) : <LoadingSpinner />}
+    </div>
   </div>
 }

@@ -31,6 +31,14 @@ module Api
         render json: { message: 'Concert deleted' }
       end
 
+      def concerts_for_artist
+        artist = Artist.find_by(id: params[:artistId])
+
+        concerts = artist.concerts.map{|concert| render_json(concert:)}
+
+        render json: concerts
+      end
+
       private
 
       def set_concert
