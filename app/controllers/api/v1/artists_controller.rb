@@ -13,6 +13,11 @@ module Api
         render json: @artist
       end
 
+      def count
+        count = Artist.all.count
+        render json: count
+      end
+
       private
 
       def artist

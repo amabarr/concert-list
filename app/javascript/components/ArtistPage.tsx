@@ -43,7 +43,6 @@ export const ArtistPage = () => {
     <div className="container-fluid page">
       <Header pageName={artist.name} />
       <div className="container-fluid single-container">
-
         <div className="artist-metadata">
           <div className="genres">Genres: {artist.genres.length > 0 ? artist.genres.join(", ") : "TBD"}</div>
         </div>

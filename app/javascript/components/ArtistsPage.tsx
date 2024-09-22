@@ -20,7 +20,6 @@ export const ArtistsPage: React.FC = () => {
         throw new Error("Network response was not ok.");
       })
       .then((res) => {
-        console.log(res.body)
         setArtists(res)
       })
       .catch(() => navigate("/"));
@@ -28,6 +27,7 @@ export const ArtistsPage: React.FC = () => {
 
   return (<div className={"container-fluid"}>
     <Header pageName="artists" />
+    <div className="total-count">Total count: {artists.length}</div>
     <div className="artists-container">
       {artists.length ? artists.map((artist) => <ArtistCard artist={artist} key={artist.id} />) : <LoadingSpinner />}
     </div>

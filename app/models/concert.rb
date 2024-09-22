@@ -9,4 +9,5 @@ class Concert < ApplicationRecord
 
   scope :work, -> { where(classification: 'work') }
   scope :fun, -> { where(classification: 'fun') }
+  scope :by_classification, ->(klass) { where(classification: klass) }
 end

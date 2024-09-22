@@ -10,10 +10,12 @@ Rails.application.routes.draw do
       post 'concerts/create'
       get '/concerts/show/:id', to: 'concerts#show'
       delete '/concerts/destroy/:id', to: 'concerts#destroy'
+      get '/concerts/count', to: 'concerts#count'
       
       get 'artists/index'
       get '/artists/show/:id', to: 'artists#show'
       get '/artists/concerts_for_artist/:artistId', to: 'concerts#concerts_for_artist'
+      get '/artists/count', to: 'artists#count'
     end
   end
 

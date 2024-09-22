@@ -13,6 +13,17 @@ module Api
         render json: concerts_with_artists
       end
 
+      def count
+        @filters = params.permit(:classification).to_h
+        concerts = Concert.all
+
+        concerts = Concert.by_classification(@filters[:classification]) if @filters[:classification].present?
+
+        count = concerts.count
+
+        render json: count
+      end
+
       def create
         concert = Concert.create!(concert_params)
         if concert
@@ -40,6 +51,10 @@ module Api
       end
 
       private
+
+      def concerts
+        @concerts ||= Concerts.all
+      end
 
       def set_concert
         @concert = render_json(concert: Concert.find_by(id: params[:id]))

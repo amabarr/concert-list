@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ConcertType } from '../types/ConcertType'
-import { ConcertCard } from './ConcertCard'
-import { Header } from './Header'
-import { LoadingSpinner } from './LoadingSpinner'
+import { ConcertType } from '../../types/ConcertType'
+import { ConcertCard } from '../ConcertCard'
+import { LoadingSpinner } from '../LoadingSpinner'
 
 const CONCERTS_API_URL = "/api/v1/concerts/index";
 
-export const Concerts: React.FC = () => {
+type ConcertProps = {
+  hideCount?: boolean;
+}
 
+export const Concerts: React.FC<ConcertProps> = ({ hideCount = false }) => {
   const navigate = useNavigate()
   const [concerts, setConcerts] = useState<ConcertType[]>([])
 
@@ -28,10 +30,10 @@ export const Concerts: React.FC = () => {
   }, []);
 
 
-  return <div className={"container-fluid"}>
-    <Header pageName="concerts" />
+  return (<>
+    {hideCount ? null : <div className="total-count">Total count: {concerts.length}</div>}
     <div className="concerts-container">
       {concerts.length ? concerts.map((concert) => <ConcertCard concert={concert} key={concert.id} />) : <LoadingSpinner />}
     </div>
-  </div>
+  </>)
 }
