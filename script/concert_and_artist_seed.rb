@@ -20,12 +20,13 @@ class ConcertsAndArtistSeed
     end
   end
 
-  def create_records(concert:) # rubocop:disable Metrics/MethodLength
+  def create_records(concert:) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     band = concert[:band]
     artist = Artist.find_or_initialize_by(name: band)
     c = Concert.find_or_initialize_by(date: concert[:date])
+    ac = ArtistConcert.find_by(artist_id: artist&.id, concert_id: c&.id)
 
-    return unless c.new_record? || artist.new_record?
+    return unless c.new_record? || artist.new_record? || ac.blank?
 
     add_concert_attributes(record: c, concert:)
 

@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+ .card {
+  min-width: 18rem;
+  width: 18rem;
+  justify-items: center;
+  margin: .75rem;
+  padding: .75rem
+ }
+
+ .concerts-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+ }

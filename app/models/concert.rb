@@ -6,4 +6,7 @@ class Concert < ApplicationRecord
 
   validates :classification, inclusion: { in: CLASSIFICATIONS }
   validates :date, presence: true, uniqueness: true
+
+  scope :work, -> { where(classification: 'work') }
+  scope :fun, -> { where(classification: 'fun') }
 end
