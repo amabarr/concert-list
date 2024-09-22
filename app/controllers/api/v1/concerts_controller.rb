@@ -7,11 +7,9 @@ module Api
         concerts = Concert.all.includes(:artists)
 
         concerts_with_artists = concerts.map do |concert|
-          c = concert.as_json
-          c['artists'] = concert.artists.as_json
-          c
+          render_json(concert:)
         end
-
+    
         render json: concerts_with_artists
       end
 
@@ -36,14 +34,24 @@ module Api
       private
 
       def set_concert
-        @concert = concert.find_by(params[:id])
+        @concert = render_json(concert: Concert.find_by(id: params[:id]))
       end
 
       def concert_params
         params.permit(:date, :location, :city, :name)
       end
 
-      def get_concerts_artists; end
+      def render_json(concert:)
+        {
+          id: concert.id,
+          classification: concert.classification,
+          date: concert.date,
+          name: concert.name,
+          city: concert.city,
+          venue: concert.venue,
+          artists: concert.artists
+        }
+      end
     end
   end
 end

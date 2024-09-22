@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'concerts/index'
       post 'concerts/create'
-      get '/show/:id', to: 'concerts#show'
-      delete '/destroy/:id', to: 'concerts#destroy'
+      get '/concerts/show/:id', to: 'concerts#show'
+      delete '/concerts/destroy/:id', to: 'concerts#destroy'
     end
   end
 

@@ -1,20 +1,27 @@
 import React from "react"
-import upperFirst from 'lodash/capitalize';
+import { Link, useLocation } from 'react-router-dom'
 
 type HeaderProps = {
   pageName: string
 }
 
-export const Header: React.FC<HeaderProps> = ({pageName}) => {
+export const Header: React.FC<HeaderProps> = ({ pageName }) => {
+  const location = useLocation()
 
+  const currentPage = location.pathname
 
   return (
-  <div>
-    <h1>{upperFirst(pageName)}</h1>
-  <nav aria-label="breadcrumb">
-    <ol className="breadcrumb">
-      <li className="breadcrumb-item"><a href="#">Home</a></li>
-      <li className="breadcrumb-item"><a href="#">Concerts</a></li>
-    </ol>
-  </nav></div>)
+    <div className="header">
+      <h1>{pageName.toUpperCase()}</h1>
+
+
+      <ul className="nav justify-content-end">
+        <li className="nav-item">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/concerts">Concerts</Link>
+        </li>
+      </ul>
+    </div>)
 }

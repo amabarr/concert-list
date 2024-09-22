@@ -28,3 +28,36 @@
   flex-wrap: wrap;
   justify-content: space-around;
  }
+
+ .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem;
+ }
+
+ .nav-item {
+  margin: 1rem;
+ }
+
+ .concert-page {
+  height: calc(100vh - 4rem)
+ }
+
+ .concert-metadata {
+  margin-bottom: 2rem;
+ }
+
+ .concert-container {
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  margin: .75rem;
+ }
+
+ .artists-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+ }
+

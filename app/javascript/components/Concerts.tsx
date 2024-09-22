@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import {useNavigate} from "react-router-dom"
 import { ConcertType } from '../types/ConcertType'
-import {Concert} from './Concert'
+import {ConcertCard} from './ConcertCard'
 import {Header} from './Header'
 import {LoadingSpinner} from './LoadingSpinner'
 
@@ -30,7 +30,7 @@ export const Concerts: React.FC = () => {
   return <div className={"container-fluid"}>
     <Header pageName="concerts" />
 <div className="concerts-container">
-{concerts.length ? concerts.map((concert) => <Concert concert={concert}  key={concert.id} />) : <LoadingSpinner /> }
+{concerts.length ? concerts.map((concert) => <ConcertCard concert={concert}  key={concert.id} />) : <LoadingSpinner /> }
 </div>
   </div>
 }
