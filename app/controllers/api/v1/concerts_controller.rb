@@ -3,10 +3,9 @@ module Api
     class ConcertsController < ApplicationController
       before_action :set_concert, only: %i[show destroy]
 
-      def index
+      def index # rubocop:disable Metrics/AbcSize
         @params = params.permit(:classification, :limit, :page).to_h
-        @concerts = Concert.all.includes(:artists)
-        # filter
+        @concerts = Concert.all
         @concerts = Concert.by_classification(@filters[:classification]) if @params[:classification].present?
 
         # paginate
@@ -16,12 +15,10 @@ module Api
 
         total_pages = @concerts.count.fdiv(per_page).ceil
         @concerts = @concerts.limit(per_page).offset(offset)
-       
-        concerts_with_artists = @concerts.map do |concert|
-          render_json(concert:)
-        end
 
-        render json: {body: {concerts: concerts_with_artists, pagination_metadata: {page:, per_page:, page_total: total_pages}}}
+        render json: { body: { concerts: @concerts.map do |concert|
+          render_json(concert:)
+        end, pagination_metadata: { page:, per_page:, page_total: total_pages } } }
       end
 
       def count
@@ -56,7 +53,7 @@ module Api
       def concerts_for_artist
         artist = Artist.find_by(id: params[:artistId])
 
-        concerts = artist.concerts.map{|concert| render_json(concert:)}
+        concerts = artist.concerts.map { |concert| render_json(concert:) }
 
         render json: concerts
       end
