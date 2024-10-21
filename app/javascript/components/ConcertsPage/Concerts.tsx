@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import React, { useEffect, useMemo, useState } from "react"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { ConcertType } from '../../types/ConcertType'
 import { ConcertCard } from '../ConcertCard'
 import { LoadingSpinner } from '../LoadingSpinner'
+import { PaginationButtons } from "../PaginationButtons"
 
 const concertsApi = (page: number, perPage: number, classification?: string) => `/api/v1/concerts/index?page=${page}&limit=${perPage}${classification ? `&classification=${classification}` : ""}`
 
@@ -12,24 +13,19 @@ type ConcertProps = {
 
 export const Concerts: React.FC<ConcertProps> = ({ hideCount = false }) => {
   const navigate = useNavigate()
-  const params = useParams()
   const [concerts, setConcerts] = useState<ConcertType[]>([])
-  const [page, setPage] = useState(1)
-  const [perPage, setPerPage] = useState(25)
+  const [page, setPage] = useState<number>(1)
+  const [perPage] = useState<number>(8)
+  const [totalPages, setTotalPages] = useState<number>(1)
 
-  const search = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    console.log("IN THIS USE EFFECT", params)
-    console.log("SEARCH", search)
-    if (params?.page) {
-      setPage(params.page as unknown as number)
+    const currentPage = searchParams.get("page") || 1
+    if (currentPage) {
+      setPage(+currentPage)
     }
-
-    if (params?.perPage){
-      setPerPage(perPage as unknown as number)
-    }
-  }, [])
+  }, [searchParams])
 
   useEffect(() => {
     const url = concertsApi(page, perPage)
@@ -41,6 +37,7 @@ export const Concerts: React.FC<ConcertProps> = ({ hideCount = false }) => {
         throw new Error("Network response was not ok.");
       })
       .then((res) => {
+        setTotalPages(res.body.pagination_metadata.page_total || 1)
         setConcerts(res.body.concerts)
       })
       .catch(() => navigate("/"));
@@ -48,26 +45,7 @@ export const Concerts: React.FC<ConcertProps> = ({ hideCount = false }) => {
 
 
   return (<>
-    {hideCount ? null : <div className="total-count">Total count: {concerts.length}</div>}
-    <nav aria-label="Page navigation example">
-  <ul className="pagination">
-    <li className="page-item">
-      <a className="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        <span className="sr-only">Previous</span>
-      </a>
-    </li>
-    <li className="page-item"><a className="page-link" href="#">1</a></li>
-    <li className="page-item"><a className="page-link" href="#">2</a></li>
-    <li className="page-item"><a className="page-link" href="#">3</a></li>
-    <li className="page-item">
-      <a className="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-        <span className="sr-only">Next</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+    <PaginationButtons currentPage={page} totalPages={totalPages} name="Concerts navigation"/>
     <div className="concerts-container">
       {concerts.length ? concerts.map((concert) => <ConcertCard concert={concert} key={concert.id} />) : <LoadingSpinner />}
     </div>
