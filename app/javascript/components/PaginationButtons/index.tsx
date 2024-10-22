@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React from "react"
 import { useSearchParams } from "react-router-dom";
 
 type PaginationButtonsProps = {

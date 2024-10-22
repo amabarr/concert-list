@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react"
-import { ConcertType } from "../../types/ConcertType"
+import { ConcertType, Classification } from "../../types/ConcertType"
 import { useNavigate } from "react-router-dom"
 
-const concertsApi = (page?: number, perPage?: number, classification?: string) => `/api/v1/concerts/index?${page ? `page=${page}` : ""}&limit=${perPage}${classification ? `&classification=${classification}` : ""}`
+const concertsApi = (page?: number, perPage?: number, classification?: Classification) => `/api/v1/concerts/index?${page ? `page=${page}` : ""}&limit=${perPage}${classification && classification != Classification.ALL ? `&classification=${classification}` : ""}`
 
-export default function useConcerts(page?: number)  {
+export default function useConcerts(page?: number, classification?: Classification)  {
   const [concerts, setConcerts] = useState<ConcertType[]>([])
   const [totalPages, setTotalPages] = useState<number>(1)
   const navigate = useNavigate()
 
   useEffect(() => {
-    const url = concertsApi(page, 8)
+    const url = concertsApi(page, 8, classification)
     fetch(url)
       .then((res) => {
         if (res.ok) {
@@ -23,7 +23,7 @@ export default function useConcerts(page?: number)  {
         setConcerts(res.body.concerts)
       })
       .catch(() => navigate("/"));
-  }, [page]);
+  }, [page, classification]);
 
   return {concerts, totalPages}
 }

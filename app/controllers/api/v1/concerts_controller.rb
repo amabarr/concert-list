@@ -6,10 +6,10 @@ module Api
       def index # rubocop:disable Metrics/AbcSize
         @params = params.permit(:classification, :limit, :page).to_h
         @concerts = Concert.all
-        @concerts = Concert.by_classification(@filters[:classification]) if @params[:classification].present?
+        @concerts = Concert.by_classification(@params[:classification]) if @params[:classification].present?
 
         # paginate
-        page = @params[:page].to_i || 1
+        page = [@params[:page].to_i, 1].max
         per_page = @params[:limit].to_i || 25
         offset = (page - 1) * per_page
 

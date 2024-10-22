@@ -88,3 +88,8 @@
   align-items: center;
   text-align: center;
  }
+
+ .classification {
+    display: flex;
+    flex-direction: column;
+ }
