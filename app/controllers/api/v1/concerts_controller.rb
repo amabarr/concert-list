@@ -5,7 +5,7 @@ module Api
 
       def index # rubocop:disable Metrics/AbcSize
         @params = params.permit(:classification, :limit, :page).to_h
-        @concerts = Concert.all
+        @concerts = Concert.all.order(:date)
         @concerts = Concert.by_classification(@params[:classification]) if @params[:classification].present?
 
         # paginate
