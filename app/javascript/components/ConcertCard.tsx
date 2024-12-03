@@ -8,7 +8,6 @@ interface ConcertCardProps {
 }
 
 export const ConcertCard: React.FC<ConcertCardProps> = ({ concert }) => {
-
   const artistNames = formatArtistsToTitle(concert.artists)
 
   const title = concert.artists.length > 3 && concert.name ? concert.name : artistNames

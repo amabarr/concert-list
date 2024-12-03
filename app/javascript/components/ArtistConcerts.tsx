@@ -23,7 +23,6 @@ export const ArtistConcerts: React.FC<ArtistConcertsProps> = ({artistId}) => {
         throw new Error("Network response was not ok.");
       })
       .then((res) => {
-        console.log(res.body)
         setConcerts(res)
       })
       .catch(() => setHasError(true));

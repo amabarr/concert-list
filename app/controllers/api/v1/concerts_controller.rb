@@ -5,7 +5,7 @@ module Api
 
       def index # rubocop:disable Metrics/AbcSize
         @params = params.permit(:classification, :limit, :page).to_h
-        @concerts = Concert.all.order(:date)
+        @concerts = Concert.includes(:artists).all.order(:date)
         @concerts = Concert.by_classification(@params[:classification]) if @params[:classification].present?
 
         # paginate
@@ -16,9 +16,7 @@ module Api
         total_pages = @concerts.count.fdiv(per_page).ceil
         @concerts = @concerts.limit(per_page).offset(offset)
 
-        render json: { body: { concerts: @concerts.map do |concert|
-          render_json(concert:)
-        end, pagination_metadata: { page:, per_page:, page_total: total_pages } } }
+        render json: { body: { concerts: @concerts.as_json(include: :artists), pagination_metadata: { page:, per_page:, page_total: total_pages } } }
       end
 
       def count
