@@ -30,7 +30,6 @@ export const ConcertPage = () => {
         throw new Error("Network response was not ok.");
       })
       .then((res) => {
-        console.log(res.body)
         setConcert(res)
       })
       .catch(() => navigate("/"));

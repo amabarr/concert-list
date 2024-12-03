@@ -73,7 +73,6 @@ export const Home = () => {
           In total I've seen <b>{artistCount > 0 ? artistCount : <LoadingSpinner />}</b> artists in <b>{concertCount > 0 ? concertCount : <LoadingSpinner />}</b> concerts.
           And {workConcertCount > 0 ? workConcertCount : <LoadingSpinner />} of those concerts were work, {funConcertCount > 0 ? funConcertCount : <LoadingSpinner />} were just for fun!
         </div>
-        <Concerts hideCount />
       </div>
     </div>
   )

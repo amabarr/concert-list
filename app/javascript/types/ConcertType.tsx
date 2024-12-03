@@ -14,3 +14,9 @@ export type ArtistType = {
   genres: string[]
   concert_count?: number
 }
+
+export enum Classification {
+  WORK = "work",
+  FUN = "fun",
+  ALL = "all"
+}

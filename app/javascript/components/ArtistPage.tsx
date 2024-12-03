@@ -31,7 +31,6 @@ export const ArtistPage = () => {
         throw new Error("Network response was not ok.");
       })
       .then((res) => {
-        console.log(res.body)
         setArtist(res)
       })
       .catch(() => navigate("/"));

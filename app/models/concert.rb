@@ -1,5 +1,6 @@
 class Concert < ApplicationRecord
   CLASSIFICATIONS = %w[fun work].freeze
+  self.implicit_order_column = 'date'
 
   has_many :artist_concerts, autosave: true, dependent: :destroy
   has_many :artists, through: :artist_concerts, inverse_of: :concerts

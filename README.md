@@ -1,24 +1,15 @@
-# README
+# Concerts list
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+All the concerts I've been to in my life!
 
-Things you may want to cover:
+Brought to you by Ruby on Rails, TypeScript, and React.js
 
-* Ruby version
+This is currently a work in progress.
 
-* System dependencies
+To run this:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Pull this repo down
+- Seed concert data locally via: `bundle exec rails r script/concert_and_artist_seed.rb`
+- `yarn build` to generate the frontend
+- Run the repo via `bin/rails server`
+- Go to `localhost:3000/` and see all of the concerts/artists I've seen!
