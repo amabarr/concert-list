@@ -1,7 +1,7 @@
 # To run this script bundle exec rails r script/concert_and_artist_seed.rb
 class ConcertsAndArtistSeed
   CONCERTS_JSON = File.expand_path('concerts.json', __dir__)
-  WORKPLACE = 'Celebrate Brooklyn'.freeze
+  WORK = 'work'.freeze
 
   def initialize
     file = File.read(CONCERTS_JSON)
@@ -48,7 +48,7 @@ class ConcertsAndArtistSeed
     record.venue = concert[:location]
     record.name = concert[:"festival-name"]
 
-    record.classification = 'work' if record.name == WORKPLACE
+    record.classification = WORK if concert[:work]
   end
 end
 
